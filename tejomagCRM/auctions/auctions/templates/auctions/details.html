@@ -1,0 +1,167 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div class="alert alert-{{msg_type}}">{{ message }}</div>
+    {% endif %}
+
+    <div class="container">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <center><img class="d-block w-100" src="{{ product.imagem1.url }}" alt="First slide"></center>
+                </div>
+    
+                {% if product.imagem2 %}
+                <div class="carousel-item">
+                <center><img class="d-block w-100" src="{{ product.imagem2.url }}" alt="Second slide"></center>
+                </div>
+                {% endif %}
+    
+    
+                {% if product.imagem3 %}
+                <div class="carousel-item">
+                <center><img class="d-block w-100" src="{{ product.imagem3.url }}" alt="Third slide"></center>
+                </div>{% endif %}
+    
+                
+    
+                {% if product.imagem4 %}
+                <div class="carousel-item">
+                <center><img class="d-block w-100" src="{{ product.imagem3.url }}" alt="Third slide"></center>
+                </div>{% endif %}
+    
+                {% if product.imagem5 %}
+                <div class="carousel-item">
+                <center><img class="d-block w-100" src="{{ product.imagem3.url }}" alt="Third slide"></center>
+                </div>{% endif %}
+    
+                {% if product.imagem6 %}
+                <div class="carousel-item">
+                <center><img class="d-block w-100" src="{{ product.imagem3.url }}" alt="Third slide"></center>
+                </div>{% endif %}
+            
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <div class="btn-group btn-group-lg" role="group" aria-label="" style="z-index: inherit 1; background-color: black; padding: 10px;">ANTERIOR</div>
+                
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> 
+                <div class="btn-group btn-group-lg" role="group" aria-label="" style="z-index: inherit 1; background-color: black; padding: 10px;">PRÓXIMO</div>
+            </a>
+        </div>
+    
+    
+        <div class="jumbotron text-center" style="padding: 3% 10%; margin-top:20px;">
+    
+            <br>
+            <br>
+            <h1><strong>{{product.title}}</strong></h1> <br>
+            <div style="display:flex">
+                {% for tag in product.tags.all %}
+                <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
+                {% endfor %}
+            </div>             
+            <br>
+            <!--<img src="{{product.image_link}}" alt="indeximage" style="height: 350px;" class="embed-responsive"> <br> <br> <br> -->
+            <p class="lead" align="justify"><strong>Descrição: </strong> {{product.description}}</p>  
+            <p class="lead" align="justify"><strong>Categoria: </strong>{{product.category}}</p>
+            <p class="lead" align="justify"><strong>Preço: </strong>€{{product.price}}</p>
+            
+            <!--<p class="lead" align="justify"><strong>Portes de Envio: €</strong>{{product.shipping_cost}}</p>-->
+            <p class="lead" align="justify"><strong>Vendedor: </strong>{{product.seller}}</p>
+            <p class="lead" align="justify"><strong>Artigo Publicado em: </strong>{{product.publicado|date}}</p>
+            <br>
+            <a href="#" class="btn btn-success btn-lg" name="remove">Comprar agora</a>
+            
+           
+            <br>
+            <br>
+    
+            
+    
+            
+     
+            <!--{% if user.username != product.seller %}
+                {% if product.terminado == True %}
+                <button type="button" class="btn btn-success">Leilão Listado desde: {{ product.created_at|timesince }}</button>
+                {% else %}
+                <p class="lead" align="justify" ><strong>Faça a sua licitação: </strong></p>
+                <form action="{% url 'viewlisting' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input class="form-control" type="number" name="newbid" placeholder="A sua licitação (€€€)">
+                        <p align="justify"><input class="btn btn-primary" type="submit" value="Submeter">
+                    </div>
+                    
+                </form>
+                {% endif %}
+            {% endif %}
+            
+             Total de Licitações: <i class="fas fa-gavel"></i> {{ ofertas }} | Total de Watchlists: <i class="far fa-grin-hearts"> {{ loves }}</i> </p>
+        
+             Displaying Bids and Watchlists-->
+            <!--<p align="justify">
+                Total de Licitações: <i class="fas fa-gavel"></i> {{ bids }} | Total de Watchlists: <i class="far fa-grin-hearts"> {{ loves }}</i> </p> 
+            <br> <br> -->
+    
+        <!-- Displaying comments-->
+        <div class="jumbotron text-center">
+    
+            <!-- Title -->
+            <h2 class="card-title h2">COMENTÁRIOS</h2>
+            <!-- Subtitle -->
+            <p class="lead my-4">Estes são os comentários deixados pelos outros utilizadores.</p>
+        
+            {% if comments %}
+    
+                {% for comment in comments %}
+                    <br>
+                    <!-- Grid row -->
+                    <div class="card text-left">
+                    <h5 class="card-header h5">{{comment.user}}</h5>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">Rating :</h5> -->
+                        <p class="lead">{{comment.comment}}</p>
+                        <p class="card-text">{{comment.timestamp|date}}</p>
+                    </div>
+                    </div>
+                {% endfor %}
+    
+            {% else %}
+                <div class="text-center">
+                    <!-- Text -->
+                    <br> <br> 
+                    <p class="lead">Sem comentários</p> 
+                </div>
+            {% endif %}
+        </div>
+        <!-- End displaying comments -->
+            
+        {% if user.username != product.seller %}
+            <!-- Displaying comments-->
+            <div class="jumbotron text-center">
+    
+                <!-- Title -->
+                <h2 class="card-title h2">ADICIONAR UM COMENTÁRIO</h2>
+                
+                <form action="{% url 'addcomment' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" name="comment" rows="4" placeholder="O seu comentário"></textarea>
+                    </div>
+                    <p align="justify"><input class="btn btn-primary" type="submit" value="Publicar"></p>
+                </form>
+            </div>
+            <!-- End add comments -->
+        {% endif %}
+    
+            
+
+    
+        </div>
+    </div>
+{% endblock %}
+
+

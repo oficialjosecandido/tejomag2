@@ -1,0 +1,22 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Vendedor {% endblock %}</title>
+{% block body %}
+    <br>
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+        <!-- Title -->
+        <h2 class="card-title h2">DESCRIÇÃO DO VENDEDOR</h2>
+        <!-- Subtitle -->
+        <p class="black-text my-4 font-weight-bold">Consulte os detalhes do vendedor.</p>
+
+
+        {% for detail in detail %}
+        <p>{{user.first_name}}</p>
+        <p>{{detail.username}}</p>
+        <p>{{user.email}}</p>
+        {% endfor %}
+    </div>
+    {% endblock  %}

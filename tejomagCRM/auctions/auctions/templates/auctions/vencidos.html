@@ -1,0 +1,41 @@
+{% extends 'auctions/dashboard.html' %}
+{% block vencidos %}
+<div class="row">
+    {% for product in winners %}
+    <!-- single product -->
+    <div class="col-lg-4 col-md-6">
+        <div class="single-product" style="background-color: white;">
+            <a href="{% url 'viewlisting' product.listingid %}"><img class="img-fluid" src="{{ product.image.url }}" alt=""></a>
+            <div class="product-details"> <center>
+                <div class="price">
+                    <h6>{{ product.title }}</h6> <br>       
+                    <h6>Vencido por: €{{ product.winprice}}</h6>
+                </div>                        
+                <a href="{% url 'viewlisting' product.listingid %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                
+            </center>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+                            
+    {% for product in vencedores %}
+    <!-- single product -->
+    <div class="col-lg-4 col-md-6">
+        <div class="single-product" style="background-color: white;">
+            <a href="{% url 'artigo' product.listingid %}"><img class="img-fluid" src="{{ product.image.url }}" alt=""></a>
+            <div class="product-details"> <center>
+                <div class="price">
+                    <h6>{{ product.titulo }}</h6> <br>       
+                    <h6>Oferta Aceite por: €{{ product.montante}}</h6>
+                </div>                          
+                <a href="{% url 'artigo' product.listingid %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                
+            </center>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% include 'auctions/paginator.html' with page=products %}
+</div>
+{% endblock %}

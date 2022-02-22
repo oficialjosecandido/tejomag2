@@ -1,0 +1,160 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Página Pessoal {% endblock %}</title>
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Dashboard</h1>
+                <p>{{request.user.username}}</p>
+                <p>{{request.user.email}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->  
+
+<!--================Contact Area =================-->
+<section class="contact_area section_gap_bottom">
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="contact_info">
+                    
+                    <div class="info_item">
+                        <i class="lnr lnr-envelope"></i>
+                        <h6>Mensagens</h6>
+                        <p>Sem mensagens</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-mustache"></i>
+                        <h6>Vendedor Verificado</h6>
+                        <p style="color: red">Não</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-smile"></i>
+                        <h6>Consumidor Verificado</h6>
+                        <p style="color: red;">Não</p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- ACORDEÃO -->
+            <div class="col-lg-9">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                <div>
+                                    <a href="{% url 'vencidos' %}" class="primary-btn" style="border-radius: 2px;">Leilões Vencidos</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'publicados' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px; ">Leilões Publicados</a>
+                                </div>
+                                <!--<div>
+                                    <a href="{% url 'watchlist' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px;">Watchlist Clássicos </a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'viewlist' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px;">Watchlist Invertidos</a> <br>
+                                </div>-->
+                                <div>
+                                    <a href="{% url 'dhistorico' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px;">Histórico Ofertas</a>
+                                </div>
+                                
+
+                            </div>
+
+                            <ul>
+                            {% for like in likes %}
+                            <li>{{ like.title }}</li>
+                            {% endfor %}    
+                            </ul>   
+
+
+
+                            {% block vencidos %}
+                            {% endblock %}
+
+                            {% block publicados %}
+                            {% endblock %}
+
+                            {% block wlst %}
+                            {% endblock %}
+
+                            {% block viewlist %}
+                            {% endblock %}
+
+                            {% block ihistorico %}
+                            {% endblock %}
+
+                            {% block dhistorico %}
+                            {% endblock %}
+
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ACORDEÃO -->
+        </div>
+    </div>
+</section>
+<!--================Contact Area =================-->
+
+
+
+
+<script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 2000;
+    const divider = 100;
+
+    counters.forEach(counter => {
+        const updateCounter = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+
+            const inc = target / divider
+            
+            if(count < target) {
+                counter.innerText = count + inc;
+                setTimeout(updateCounter, 1); 
+            } else {
+                counter.innerText = target;
+            }
+        }
+
+    updateCounter();    
+    });
+</script>
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.list').click(function() {
+            const value = $(this).attr('data-filter');
+            if (value == 'todos') {
+                $('.itemBox').show('1000');
+            }
+            else{
+                $('.itemBox').not('.'+value).hide('1000');
+                $('.itemBox').filter('.'+value).show('1000');
+            }
+        })
+
+        $('.list').click(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+        })
+    })
+
+</script>
+{% endblock %}

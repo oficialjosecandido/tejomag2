@@ -1,0 +1,89 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Computadores {% endblock %}</title>
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Tablets</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->    
+
+
+<!-- start product Area -->
+<section >
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <br>                        
+                        <div id="searchWrapper"></div>                                               
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in increases %}
+                {% if product.category == 'Tablets' %}
+                <!-- single product -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product" style="background-color: white;">
+                        <a href="{% url 'viewlisting' product.id %}"><img class="img-fluid" src="{{ product.imagem1.url }}" alt=""></a>
+                        <div class="product-details"><center>
+                            <div class="price">
+                                <h6>LEILÃO CLÁSSICO</h6>
+                                <h6>{{ product.title }}</h6> <br>                                
+                                <p style="padding: 15px; text-align: center;">{{product.excerpt}}</p>
+                                <h6>Oferta Actual: €{{ product.starting_bid}}</h6>
+                                <h6>Leilão termina em: {{ product.deadline|timeuntil }}!</h6>
+                            </div>  <br>                            
+                            <a href="{% url 'viewlisting' product.id %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                            
+                        </center>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                {% for product in decreases %}
+                {% if product.category == 'Tablets' %}
+                <!-- single product -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product" style="background-color: white;">
+                        <a href="{% url 'artigo' product.id %}"><img class="img-fluid" src="{{ product.imagem1.url }}" alt=""></a>
+                        <div class="product-details"><center>
+                            <div class="price">
+                                <h6>LEILÃO INVERTIDO</h6>
+                                <h6>{{ product.title }}</h6> <br>                                
+                                <p style="padding: 15px; text-align: center;">{{product.excerpt}}</p>
+                                <h6>Preço Base: €{{ product.pbase}}</h6>
+                                <h6>Leilão termina em: {{ product.deadline|timeuntil }}!</h6>
+                            </div>  <br>                            
+                            <a href="{% url 'artigo' product.id %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                            
+                        </center>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+                {% include 'auctions/paginator.html' with page=decreases %}
+                
+            </div>
+        </div>
+    </div>
+    <!-- single product slide -->
+    
+</section>
+<!-- end product Area -->
+
+
+{% endblock %}

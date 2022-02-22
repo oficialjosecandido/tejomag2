@@ -1,0 +1,82 @@
+{% extends "auctions/layout.html" %}
+<br>
+{% load static %}
+<br>
+{% block title %}
+    Resultados da Pesquisa
+{% endblock %}
+
+{% block content %}
+
+<br>
+{% if message %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endif %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Leilões Clássicos Activos</h1>
+                <p>Hoje temos {{ total }} leilões activos para si. Pode clicar <a style="text-decoration: none; color: white;" href="{% url 'anunciar' %}">AQUI</a> para criar o seu Leilão</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->    
+
+<!-- start product Area -->
+<section >
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <br>                        
+                        <div id="searchWrapper">
+                            <h6>Aqui estão os resultados da sua pesquisa</h6>
+                            <p>Pode procurar novamente:</p>
+                            <form action="{% url 'resultados' %}" method="GET">
+                                <input type="text" name="q" value="{{request.GET.q}}" placeholder="Procurar">
+                            </form>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in results %}
+                <!-- single product -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product">
+                        <a href="{% url 'viewlisting' product.id %}"><img class="img-fluid" src="{{ product.imagem1.url }}" alt=""></a>
+                        <div class="product-details"><center>
+                            <div class="price">
+                                <h6>{{ product.title }}</h6> <br>
+                                {% for mt in common_tags %}
+                                    <a href="#" class="badge badge-success">{{mt}}</a>
+                                {% endfor %} 
+                                <p style="padding: 15px; text-align: center;">{{product.excerpt}}</p>
+                                <h6>Oferta Actual: €{{ product.starting_bid}}</h6>
+                                <h6>Leilão termina em: {{ product.deadline|timeuntil }}!</h6>
+                            </div>  <br>                            
+                            <a href="{% url 'viewlisting' product.id %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                            
+                        </center>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% include 'auctions/paginator.html' with page=results %}
+                
+            </div>
+        </div>
+    </div>
+    <!-- single product slide -->
+    
+</section>
+<!-- end product Area -->
+
+
+
+
+{% endblock %}

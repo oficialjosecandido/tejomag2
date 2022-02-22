@@ -1,0 +1,226 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="https://2mao.pt/assets/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="José Cândido">
+	<!-- Meta Description -->
+	<meta name="description" content="2Mão é um site de leilões onde pode comprar e vender aparelhos tecnológicos">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="Tech, Tecnologia, Leilões, Comprar, Vender,">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>{% block title %}TEJOMAG{% endblock %}</title>
+	
+	<link href="{% static 'css/media_query.css'  %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="{% static 'css/animate.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="{% static 'css/owl.carousel.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/owl.theme.default.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/style_1.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="{% static 'js/modernizr-3.5.0.min.js' %}"></script>
+
+    <!-- SHARE THIS -->
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60130a3b1f464300110bab2e&product=inline-share-buttons' async='async'></script>
+    <!-- FIM DO SHARE THIS-->
+
+</head>
+
+<!-- ShareThis BEGIN -->
+<div class="sharethis-inline-share-buttons"></div>
+<!-- ShareThis END -->
+
+<body>
+	<!-- Nagigation Menu -->
+	<div class="container-fluid fh5co_header_bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 fh5co_mediya_center"><a href="#" class="color_fff fh5co_mediya_setting" id="day"></a>
+					<div class="d-inline-block fh5co_trading_posotion_relative"><a href="#" class="treding_btn">Últimas Notícias</a>
+						<div class="fh5co_treding_position_absolute"></div>
+					</div>
+					<a href="#" class="color_fff fh5co_mediya_setting">Irá a Rússia invadir a Ucrânia?</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid bg-faded fh5co_padd_mediya padding_786">
+		<div class="container padding_786">
+			<nav class="navbar navbar-toggleable-md navbar-light ">
+				<button class="navbar-toggler navbar-toggler-right mt-3" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation"><span class="fa fa-bars"></span></button>
+				<a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" alt="img" class="mobile_logo_width"/></a>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="index.html">Início <span class="sr-only">(current)</span></a>
+						</li>
+						
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton2" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">Notícias <span class="sr-only">(current)</span></a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
+								<a class="dropdown-item" href="#">Política</a>
+								<a class="dropdown-item" href="#">Economia</a>
+								<a class="dropdown-item" href="#">Desporto</a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdownMenuButton3" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">Especiais<span class="sr-only">(current)</span></a>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink_1">
+								<a class="dropdown-item" href="#">Reportagens</a>
+								<a class="dropdown-item" href="#">Entrevistas</a>
+								<a class="dropdown-item" href="#">Podcasts</a>
+							</div>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="blog.html">Empresas <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="single.html">Voluntários <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="Contact_us.html">Contacte-nos <span class="sr-only">(current)</span></a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<!-- End of Navigation Menu -->
+
+    {% block content %}
+    {% endblock %}
+
+	
+
+	<!-- start footer Area -->
+	<div class="container-fluid fh5co_footer_bg pb-3">
+		<div class="container animate-box">
+			<div class="row">
+				<div class="col-12 spdp_right py-5">
+					<!--<img src="{% static 'images/white_logo.png' %}" alt="img" class="footer_logo"/>-->
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-12 col-md-4 col-lg-3">
+					<div class="footer_main_title py-3"> Quem somos</div>
+					<div class="footer_sub_about pb-3"> Informação, Verdade e Oportunidade. Estes são os valores da TEJOmag, uma plataforma independente de informação sobre a realidade e actualidade de Portuguesa.
+						<br>
+						Siga-nos também nas nossas redes sociais.
+					</div>
+					<div class="footer_mediya_icon">
+						<div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+							<div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div>
+						</a></div>
+						<div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+							<div class="fh5co_verticle_middle"><i class="fa fa-instagram"></i></div>
+						</a></div>
+						<div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+							<div class="fh5co_verticle_middle"><i class="fa fa-whatsapp"></i></div>
+						</a></div>
+						<div class="text-center d-inline-block"><a class="fh5co_display_table_footer">
+							<div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
+						</a></div>
+					</div>
+				</div>
+				<div class="col-12 col-md-3 col-lg-2">
+					<div class="footer_main_title py-3"> Links úteis</div>
+					<ul class="footer_menu">
+						<li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Publicidade</a></li>
+						<li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Donativos</a></li>
+						<li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Quem somos</a></li>
+						<li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Política de Privacidade</a></li>
+						<li><a href="#" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; Termos & Condições</a></li>
+						
+					</ul>
+				</div>
+				<div class="col-12 col-md-5 col-lg-3 position_footer_relative">
+					<div class="footer_main_title py-3"> Últimas Notícias</div>
+					<div class="footer_makes_sub_font"> Dec 31, 2021</div>
+					<a href="#" class="footer_post pb-4"> Success is not a good teacher failure makes you humble </a>
+					<div class="footer_makes_sub_font"> Dec 31, 2021</div>
+					<a href="#" class="footer_post pb-4"> Success is not a good teacher failure makes you humble </a>
+					<div class="footer_makes_sub_font"> Dec 31, 2021</div>
+					<a href="#" class="footer_post pb-4"> Success is not a good teacher failure makes you humble </a>
+					<div class="footer_position_absolute"><img src="https://technext.github.io/24-news/images/footer_sub_tipik.png" alt="img" class="width_footer_sub_img"/></div>
+				</div>
+				<div class="col-12 col-md-12 col-lg-4 ">
+					<div class="footer_main_title py-3"> Imagens da Semana</div>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/allef-vinicius-108153.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/32-450x260.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/download (1).jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/science-578x362.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/vil-son-35490.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/zack-minor-15104.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/download.jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/download (2).jpg" alt="img"/></a>
+					<a href="#" class="footer_img_post_6"><img src="https://technext.github.io/24-news/images/ryan-moreno-98837.jpg" alt="img"/></a>
+				</div>
+			</div>
+			<div class="row justify-content-center pt-2 pb-4">
+				<div class="col-12 col-md-8 col-lg-7 ">
+					<div class="input-group">
+						<span class="input-group-addon fh5co_footer_text_box" id="basic-addon1"><i class="fa fa-envelope"></i></span>
+						<input type="text" class="form-control fh5co_footer_text_box" placeholder="Insira o seu email..." aria-describedby="basic-addon1">
+						<a href="#" class="input-group-addon fh5co_footer_subcribe" id="basic-addon12"> <i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Subscreva a nossa newsletter</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid fh5co_footer_right_reserved">
+		<div class="container">
+			<div class="row  ">
+				<div class="col-12 col-md-6 py-4 Reserved"> © Copyright 2022, All rights reserved. Design by <a href="https://freehtml5.co" title="Free HTML5 Bootstrap templates">TEJO Digital Solutions</a>. </div>
+				<div class="col-12 col-md-6 spdp_right py-4">
+					<a href="#" class="footer_last_part_menu">Home</a>
+					<a href="Contact_us.html" class="footer_last_part_menu">Quem somos</a>
+					<a href="Contact_us.html" class="footer_last_part_menu">Contacte-nos</a>
+			</div>
+		</div>
+	</div>
+	<!-- End footer Area -->
+
+	<!-- Scroll to Top -->
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+	</div>
+
+	<!-- SCRIPTS -->
+	<script>
+		const d = new Date();
+		let text = d.toString().slice(0, 15);
+		document.getElementById("day").innerHTML = text;
+	</script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+			integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+			crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+			integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+			crossorigin="anonymous"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+	<!-- Main -->
+	<script src="{% static 'js/main.js'  %}"></script>
+		
+</body>
+
+</html>

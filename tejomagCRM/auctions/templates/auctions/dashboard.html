@@ -1,0 +1,106 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Página Pessoal {% endblock %}</title>
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Dashboard</h1>
+                <p>{{request.user.username}}</p>
+                <p>{{request.user.email}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->  
+
+<!--================Contact Area =================-->
+<section class="contact_area section_gap_bottom">
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="contact_info">
+                    <div class="info_item">
+                        <i class="lnr lnr-mustache"></i>
+                        <h6>Vendedor Verificado</h6>
+                        <p style="color: red">Não</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-smile"></i>
+                        <h6>Consumidor Verificado</h6>
+                        <p style="color: red;">Não</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-envelope"></i>
+                        <h6>Mensagens <span>({{contador}})</span> </h6> 
+                        {% if mensagem %}
+                                {% for m in mensagem %}
+                                <h6>{{m.title}}</h6>
+                                <p>{{m.text}}</p>
+                                {% endfor %}                                
+                        {% else %}
+                        <p>Sem mensagens</p>
+                        {% endif %}
+                    </div>
+                    
+
+                </div>
+            </div>
+            <!-- ACORDEÃO -->
+            <div class="col-lg-9">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+                                <div>
+                                    <a href="{% url 'vencidos' %}" class="primary-btn" style="border-radius: 2px;">Leilões Vencidos</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'publicados' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px; ">Leilões Publicados</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'watchlist' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px;">Watchlist</a>
+                                </div>
+                                <div>
+                                    <a href="{% url 'dhistorico' %}" class="primary-btn" style="border-radius: 2px; margin-left: 5px;">Histórico Ofertas</a>
+                                </div>
+                                
+
+                            </div>
+
+                            
+
+                            {% block vencidos %}
+                            {% endblock %}
+
+                            {% block publicados %}
+                            {% endblock %}
+
+                            {% block wlst %}
+                            {% endblock %}
+
+                            {% block viewlist %}
+                            {% endblock %}
+
+                            {% block ihistorico %}
+                            {% endblock %}
+
+                            {% block dhistorico %}
+                            {% endblock %}
+
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ACORDEÃO -->
+        </div>
+    </div>
+</section>
+<!--================Contact Area =================-->
+
+{% endblock %}

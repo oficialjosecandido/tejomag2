@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>{{title}}</title>
+        <!-- link to bootstrap  -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Google Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <!-- Link to static files  -->
+        <script type="text/javascript" src="{% static 'main.js' %}"></script>
+        
+    </head>
+
+    <body>
+        <h1>Obrigado pela sua oferta</h1>
+        <h3>Acabou de colocar uma oferta de {{content.valor}} para o seguinte artigo:</h3>  
+        {% for product in products %}
+            <div>
+                                    <div class="card item-card card-block">
+                
+                    {% if product.especialista %}<h5 style="text-align: right; color: white; background-color: green; margin-top: -1px;">VERIFICADO</h5>{% endif %}
+               <!-- <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>-->
+                    <center><img src="{{ product.imagem1.url }}" alt="{{ product.titulo }}" style="max-height: 250px; max-width: 250px;"></center>
+                  <h4 class="item-card-title mt-3 mb-3">{{product.titulo}}</h4>
+                  <p class="card-text" style="padding: 10px; text-align: center;">{{product.excerpt}}</p> 
+                  <p class="font-weight-bold">Oferta Actual: €{{product.pbase}}
+               
+                    {% if product.especialista %} | Avaliação Especialista: €{{product.especialista}}{% endif %}<br></p>
+                    
+                    <!-- Button -->
+                     <a href="{% url 'artigo' product.id %}" class="btn btn-primary">Visualizar</a>
+                    <!-- Card footer -->
+                    <div class="card-footer text-muted text-center">
+                       <!--<i class="fas fa-gavel"></i>  {{ ofertas }}   |   <i class="far fa-grin-hearts"> {{ loves }}</i> <br>-->
+                       <b>Leilão termina em</b>:</strong> {{ product.prazo|timeuntil }}!
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% include 'auctions/paginator.html' with page=products %}
+
+    </body>
+
+</html>

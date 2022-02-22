@@ -1,0 +1,102 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Página Inicial {% endblock %}</title>
+{% load static %}
+{% block content %}
+	
+
+	<!-- PONTOS FORTES -->
+	<section class="features-area section_gap" style="margin-top: 50px;">
+		<div class="container">
+			<div class="row features-inner">
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="https://2mao.pt/assets/img/features/f-icon1.png" alt="">
+						</div>
+						<h6>Entregas Grátis</h6>
+						<p>Em Portugal Continental</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="https://2mao.pt/assets/img/features/f-icon2.png" alt="">
+						</div>
+						<h6>Valor Real?</h6>
+						<p>Avaliação de Especialistas</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="https://2mao.pt/assets/img/features/f-icon3.png" alt="">
+						</div>
+						<h6>Linha de Suporte</h6>
+						<p>Dias úteis: 9h-18h</p>
+					</div>
+				</div>
+				<!-- single features -->
+				<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="single-features">
+						<div class="f-icon">
+							<img src="https://2mao.pt/assets/img/features/f-icon4.png" alt="">
+						</div>
+						<h6>Pagamento Seguro</h6>
+						<p>Transferência Bancária</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- FIM DOS PONTOS FORTES -->
+
+	<!-- start product Area -->
+<section >
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container" style="margin-top: -30px;">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <h4>Estes são os destaques que temos hoje para si:</h4>
+                    </div>
+                </div>
+            </div>
+			<div style="display: flex; flex-direction: row; flex-wrap: wrap; align-content: flex-start; align-items: center; justify-content: center;">
+				{% for product in destaques %}
+				<div style="min-width: 300px; margin: 3px;">
+					<a href="{% url 'viewlisting' product.id %}" style="text-decoration: none;">
+					<div class="profile-card-4 text-center" style="height:500px;">
+						<img src="{{ product.imagem1.url }}" style="max-height: 300px;" alt="{{ product.title }}" class="img img-responsive">
+						<div class="profile-content">
+							<div class="profile-description"> <h5>{{ product.title }}</h5> {{ product.excerpt }}</div> 
+							<div class="row2" style="display: flex; justify-content: center; align-items: center;">
+								<div class="col-xs-4" style="margin-left: 5px;">
+									<div class="profile-overview">
+										<p>DEADLINE</p>
+										<h4>{{ product.deadline|timeuntil}}</h4></div>
+								</div>
+								<div class="col-xs-4" style="margin-left: 10px;"> 
+									<div class="profile-overview">
+										<p>OFERTA ACTUAL</p>
+										<h4>€{{ product.starting_bid}}</h4></div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					</a>
+				</div>
+				{% endfor %}
+                {% include 'auctions/paginator.html' with page=products %}
+            </div>
+       
+    <!-- single product slide -->
+    
+</section>
+<!-- end product Area -->
+
+{% endblock %}

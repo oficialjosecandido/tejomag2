@@ -1,0 +1,30 @@
+{% extends 'auctions/dashboard.html' %}
+{% block viewlist %}
+<div class="row" style="margin-top:20px;">
+    {% if present %}
+    {% for product in products %}
+    <!-- single product -->
+    <div class="col-lg-4 col-md-6">
+        <div class="single-product" style="background-color: white;">
+            <img class="img-fluid" src="{{ product.imagem1.url }}" alt="">
+            <div class="product-details"> 
+            <center>
+                <div class="price">
+                    <h6>{{ product.title }}</h6> <br>       
+                    <h6>Preço Base: €{{ product.pbase}}</h6>
+                </div>
+                <br>                        
+                <a href="{% url 'artigo' product.id %}" class="primary-btn" style="border-radius: 2px;">Visualizar</a>
+                
+            </center>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h4>Sem Leilões na sua watchlist</h4>
+    {% endif %}
+                            
+    {% include 'auctions/paginator.html' with page=products %}
+</div>
+{% endblock %}

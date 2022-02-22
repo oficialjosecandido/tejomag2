@@ -1,0 +1,78 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Leilões Activos{% endblock %}</title>
+{% block body %}
+    <br>
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+        <!-- Title -->
+        <h2 class="card-title h2">LEILÕES TERMINADOS</h2>
+        <!-- Subtitle -->
+        <p class="black-text my-4 font-weight-bold">Estes são os Leiliões {{ total }} terminados.
+            Pode ver <a href="{% url 'activelisting' %}">AQUI</a> os leilões activos. </p>
+
+
+        <br>
+
+
+        
+
+    <!-- Grid row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr ; grid-gap: 10px; ">
+        <!-- Grid column -->
+        <!--<div class="col-xl-7 pb-2">-->
+       <!-- <div class="col-md-6 col-lg-4 column">
+            <div class="card gr-1">-->
+            {% if empty %}
+                <br>
+                <img src="../../static/auctions/img/foractive.svg" alt="indeximage" style="height: 350px;" class="embed-responsive">
+                <br> <br> <br>
+                <div>Sem ofertas disponíveis</div>
+            {% else %} 
+
+
+
+            {% for product in products %}
+            <div >
+                
+                    <div class="card item-card card-block">
+                
+                
+                    
+               <!-- <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>-->
+                    <center><img src="{{ product.imagem1.url }}" alt="{{ product.title }}" style="max-height: 250px; max-width: 250px;"></center>
+                  <h4 class="item-card-title mt-3 mb-3">{{product.title}}</h4>
+                  
+                  <p class="font-weight-bold">Licitação Final: €{{product.starting_bid}}</p>
+                  <div>
+                    <a href="#" class="fb-btn"><i class="fab fa-facebook"></i> </a>
+                    <a href="#" class="wp-btn"><i class="fab fa-whatsapp"></i> </a>
+                    <a href="#" class="in-btn"><i class="fab fa-linkedin"></i> </a>
+                    </div>
+                    <!-- Button -->
+                     <a href="{% url 'viewlisting' product.id %}" class="btn btn-primary">Visualizar</a>
+                    <!-- Card footer -->
+                    <div class="card-footer text-muted text-center">
+                        Oferta publicada em:  {{product.created_at|date}}. <br>
+                       
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% include 'auctions/paginator.html' with page=products %}
+            <br>
+            <br>
+
+               
+            {% endif %} </div>
+        </div>
+    </div>
+
+
+
+    
+    </div>
+    <!-- Jumbotron -->
+{% endblock %}

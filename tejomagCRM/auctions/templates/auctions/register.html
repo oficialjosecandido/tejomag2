@@ -1,0 +1,86 @@
+{% extends "auctions/layout.html" %}
+
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Pode fazer aqui o seu Registo</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Contact Area =================-->
+<section class="contact_area section_gap_bottom">
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="contact_info">
+                    <div class="info_item">
+                        <i class="lnr lnr-home"></i>
+                        <h6>Lisboa, Portugal</h6>
+                        <p>NIF: 261637894</p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-phone-handset"></i>
+                        <h6>(351) 933 407 551</h6>
+                        <p>Seg-Sextas. 10h-18h </p>
+                    </div>
+                    <div class="info_item">
+                        <i class="lnr lnr-envelope"></i>
+                        <h6><a href="#">geral@2mao.pt</a></h6>
+                        <p>Envie-nos um email quando quiser!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <form class="row contact_form" action="{% url 'register' %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" name="username" placeholder="Utilizador">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Email ">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="confirmation" placeholder="Confirme a sua Password">
+                        </div>
+                        {% if message %}
+                            <div class="alert alert-{{msg_type}}" style="padding: 10px;">{{ message }}</div>
+                        {% endif %}
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <br>
+                            <p style="text-align: justify;">Ao registar-se está a aceitar os nossos <a href="">Termos & Condições</a></p>
+                            <p style="text-align: justify;">Para mais informações pode contactar-nos através do nosso <a href="">Formulário</a> ou através dos 
+                            dos nossos canais de Email ou Telefone.</p>
+                            <p style="text-align: justify;">Obrigado</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button type="submit" value="submit" class="primary-btn">Concluir o Registo </button>
+                        {% if message %}
+                            <div class="alert alert-danger">{{ message_name }}</div>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Contact Area =================-->
+
+
+
+{% endblock %}

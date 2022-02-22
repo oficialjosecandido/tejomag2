@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Categoria {% endblock %}</title>
+{% block body %}
+<br>
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+<center>
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center" style="max-width: 1300px;">
+        <!-- Title -->
+        <h2 class="card-title h2">OFERTAS DISPONÍVEIS</h2>
+        <!-- Subtitle -->
+        <p class="black-text my-4 font-weight-bold">Estes são os leilões e ofertas activos para a categoria: {{categ}}.</p>
+        <br>
+        
+<!-- Grid row -->
+<div style="display: grid; grid-template-columns: 1fr 1fr 1fr ; grid-gap: 10px; ">
+    <!-- Grid column -->
+    <!--<div class="col-xl-7 pb-2">-->
+   <!-- <div class="col-md-6 col-lg-4 column">
+        <div class="card gr-1">-->
+        {% if empty %}
+            <br>
+            <img src="../../static/auctions/img/foractive.svg" alt="indeximage" style="height: 350px;" class="embed-responsive">
+            <br> <br> <br>
+            <div>Sem ofertas disponíveis</div>
+        {% else %} 
+
+
+
+        {% for product in products %}
+        <div >
+            {% if product.especialista %}
+                <div class="card item-card card-block" style="border: solid 5px green;">
+            {% else %}
+                <div class="card item-card card-block">
+            {% endif %}
+            
+                {% if product.especialista %}<h5 style="text-align: right; color: white; background-color: green; margin-top: -1px;">VERIFICADO</h5>{% endif %}
+           <!-- <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>-->
+                <center><img src="{{ product.imagem1.url }}" alt="{{ product.title }}" style="max-height: 250px; max-width: 250px;"></center>
+              <h4 class="item-card-title mt-3 mb-3">{{product.title}}</h4>
+              <p class="card-text" style="padding: 10px; text-align: center;">{{product.excerpt}}</p> 
+              <p class="font-weight-bold">Oferta Actual: €{{product.starting_bid}}
+           
+                {% if product.especialista %} | Avaliação Especialista: €{{product.especialista}}{% endif %}<br></p>
+                <!-- Button -->
+                 <a href="{% url 'viewlisting' product.id %}" class="btn btn-primary">Visualizar</a>
+                <!-- Card footer -->
+                <div class="card-footer text-muted text-center">
+                    Oferta activa desde: <br> {{product.created_at|date}}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% include 'auctions/paginator.html' with page=products %}
+        <br>
+        <br>
+
+           
+        {% endif %} </div>
+    </div>
+</div>
+</center>
+    <!-- Jumbotron -->
+{% endblock %}

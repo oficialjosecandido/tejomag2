@@ -1,0 +1,49 @@
+{% extends "auctions/layout.html" %}
+
+{% block content %}
+
+<br>
+
+<!--================Login Box Area =================-->
+<section class="login_box_area section_gap" style="margin-top:20px;"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="https://2mao.pt/assets/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>Primeira vez que entra na 2Mão?</h4>
+                        <p>Excelente, pode criar aqui a sua conta</p>
+                        <a class="primary-btn" href="{% url 'register' %}">Registar-se</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Iniciar Sessão</h3>
+                    
+                    <form class="row login_form" action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Utilizador ou Email">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" type="password" name="password" placeholder="Palavra-Passe">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Iniciar Sessão</button>
+                        </div>                        
+                        <p style="text-align: left;"><a style="text-decoration: none; color: black;" href="{% url 'password_reset' %}">Esqueceu-se da sua password ou do seu username?</a></p>
+                        {% if message %}
+                        <div class="alert alert-{{ msg_type }}">{{ message }}</div>
+                         {% endif %}                       
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
+
+    
+{% endblock %}

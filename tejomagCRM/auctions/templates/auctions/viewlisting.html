@@ -1,0 +1,192 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | {{product.title}} {% endblock %}</title>
+{% block content %}
+	
+
+	<!--================Single Product Area =================-->
+	<div class="product_image_area" style="margin-top: 20px">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					<div class="s_Product_carousel">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{ product.imagem1.url }}" alt="">
+						</div>
+                        {% if product.imagem2 %}
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{ product.imagem2.url }}" alt="">
+						</div>
+                        {% else %}
+                        <div class="single-prd-item">
+							<img class="img-fluid" src="{{ product.imagem1.url }}" alt="">
+						</div>
+                        {% endif %}
+                        {% if product.imagem3 %}
+						<div class="single-prd-item">
+							<img class="img-fluid" src="{{ product.imagem3.url }}" alt="">
+						</div>
+                        {% else %}
+                        <div class="single-prd-item">
+							<img class="img-fluid" src="{{ product.imagem1.url }}" alt="">
+						</div>
+                        {% endif %}
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1" style="margin-top: -20px;">
+					<div class="s_product_text">
+						<h3>{{ product.title}}</h3>
+						
+						<ul class="list">							
+							<li >{% for tag in product.tags.all %}
+                                <a href="{% url 'tagged' tag.slug %}" class="genric-btn primary small" style="margin: 3px; padding: 5px;">{{ tag }}</a>
+                                {% endfor %}</li>
+                            <br>
+                            <li><strong>Vendedor:</strong>  {{product.seller}}</li>
+                            <li><strong>Oferta Publicada em:</strong> {{product.created_at}}</li>
+						</ul>
+						<p style="text-align: justify;">{{ product.excerpt }}</p>
+
+						
+						<br>
+						{% if product.finished == False %}
+						<h2>Melhor Oferta: €{{ product.starting_bid}}</h2>
+						<form action="{% url 'viewlisting' product.id %}" method="POST" class="d-flex align-items-center">
+							{% csrf_token %}
+							
+								{% if user.username != product.seller %}
+									<input class="form-control" type="number" name="newbid" placeholder="A sua licitação (€€€)">
+									<input class="primary-btn btn-xl" style="border: none; border-radius: 1px; margin-left: 3px;" type="submit" value="Publicar">
+								{% else %}
+								<h6>Não pode licitar os seus leilões.</h6>
+								{% endif %}
+							
+						</form>	
+						<p ><strong>Leilão termina em:</strong> {{ product.deadline|timeuntil }}</p> 
+						{% else %}
+						<p ><strong>Leilão Terminado</strong></p> <br>                                
+						{% endif %}
+						{% if added %}
+							<!-- <input type="button" class="btn btn-danger btn-lg" name="remove" placeholder="Remove from Watchlist"> -->
+							<a href="{% url 'addtowatchlist' product.id %}" class="btn btn-danger btn-lg" name="remove">Remover da Watchlist</a>
+						{% else %}
+							<!-- <input type="button" class="btn btn-success btn-lg" name="addto" placeholder="Add to Watchlist"> -->
+							<a href="{% url 'addtowatchlist' product.id %}" class="btn btn-success btn-lg" name="addto">Adicionar à Watchlist</a>
+						{% endif %}
+						<br>   						
+						<br>
+						<div class="table-responsive">
+							<h5>Últimas 5 ofertas</h5>
+						<table class="table">
+							<tbody>
+                                {% for bid in lasthistory %}
+								<tr>
+									<td>
+										<h5>{{bid.user}}</h5>
+									</td>
+									<td>
+										<h5>€{{bid.bid}}</h5>
+									</td>
+									<td>
+										<h5>{{bid.created_at|date}}</h5>
+									</td>
+								</tr>
+                                {% endfor%}
+								
+							</tbody>
+						</table>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->
+
+	<!--================Product Description Area =================-->
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="home-tab" data-toggle="tab" href="#description" role="tab" aria-controls="home" aria-selected="true">Descrição</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#expert" role="tab" aria-controls="profile"
+					 aria-selected="false">Histórico de Licitações</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="contact"
+					 aria-selected="false">Comentários</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade" id="description" role="tabpanel" aria-labelledby="home-tab">
+					<p style="text-align:justify;">{{ product.description }}</p>
+				</div>
+				<div class="tab-pane fade" id="expert" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+                                {% for bid in history %}
+								<tr>
+									<td>
+										<h5>Licitação de: {{bid.user}}</h5>
+									</td>
+									<td>
+										<h5>Valor: €{{bid.bid}}</h5>
+									</td>
+									<td>
+										<h5>{{bid.created_at|date}}</h5>
+									</td>
+								</tr>
+                                {% endfor%}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="contact-tab">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="comment_list">
+								<div class="review_item">
+                                    {% for comment in comments %}
+									<div class="media">                                        
+										<div class="media-body">                                                   
+											<h4>{{comment.user}}</h4>
+											<h5>{{comment.timestamp|date}}</h5>
+										</div>
+									</div>
+									<p>{{comment.comment}}</p>
+                                    <hr>
+                                    {% endfor %}
+								</div>
+								
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="review_box">
+                                {% if user.username != product.seller %}
+								<h4>Post a comment</h4>
+								<form action="{% url 'addcomment' product.id %}" method="POST" >
+									{% csrf_token %}
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea class="form-control" name="comment" rows="1" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 text-right">
+										<button type="submit" value="Publicar" class="btn primary-btn">Publicar</button>
+									</div>
+								</form>
+                                {% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	<!--================End Product Description Area =================-->
+
+{% endblock %}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="https://2mao.pt/assets/img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="José Cândido">
+	<!-- Meta Description -->
+	<meta name="description" content="2Mão é um site de leilões onde pode comprar e vender aparelhos tecnológicos">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="Tech, Tecnologia, Leilões, Comprar, Vender,">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>{% block title %}2ª Mão{% endblock %}</title>
+	<!-- CSS ============================================= -->
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/linearicons.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/owl.carousel.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/nice-select.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/nouislider.min.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/ion.rangeSlider.skinFlat.css" />
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="https://2mao.pt/assets/css/main.css">
+	<link rel="stylesheet" href="https://2mao.pt/estilo/app.css">
+	<!-- FIM DO CSS ============================================= -->
+
+    <!-- SHARE THIS -->
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60130a3b1f464300110bab2e&product=inline-share-buttons' async='async'></script>
+    <!-- FIM DO SHARE THIS-->
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-188160695-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-188160695-1');	
+	</script>
+	<!-- Fim do Google Analytics -->
+
+	<style>
+		
+.profile-card-4 {
+    max-width: 300px;
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.profile-card-4 img {
+    transition: all 0.25s linear;
+}
+
+.profile-card-4 .profile-content {
+    position: relative;
+    padding: 15px;
+    background-color: #FFF;
+}
+
+.profile-card-4 .profile-name {
+    font-weight: bold;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: -70px;
+    color: #FFF;
+    font-size: 17px;
+}
+
+.profile-card-4 .profile-name p {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+}
+
+.profile-card-4 .profile-description {
+    color: #777;
+    font-size: 12px;
+    padding: 10px;
+	height: 100px;
+}
+
+.profile-card-4 .profile-overview {
+    padding: 15px 0px;
+}
+
+.profile-card-4 .profile-overview p {
+    font-size: 10px;
+    font-weight: 600;
+    color: #777;
+}
+
+.profile-card-4 .profile-overview h4 {
+    color: #273751;
+    font-weight: bold;
+}
+
+.profile-card-4 .profile-content::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    top: -10px;
+    left: 0px;
+    right: 0px;
+    background-color: #FFF;
+    z-index: 0;
+    transform: skewY(3deg);
+}
+
+.profile-card-4:hover img {
+    transform: rotate(5deg) scale(1.1, 1.1);
+    filter: brightness(110%);
+}
+
+	</style>
+
+</head>
+<body>
+
+    <!-- ShareThis BEGIN -->
+    <div class="sharethis-inline-share-buttons"></div>
+    <!-- ShareThis END -->
+
+	<!-- MENÚ NAVEGAÇÃO -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a class="navbar-brand logo_h" href="{% url 'index' %}"><img src="https://2mao.pt/assets/img/logo.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							<li class="nav-item active"><a class="nav-link" href="{% url 'index' %}">{% if user.is_authenticated %}
+								Olá {{ user}} {% else %}
+								Início
+								{% endif %}</a></li>
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">COMPRAR</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{% url 'activelisting' %}">Leilões Clássicos</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'invertidos' %}">Leilões Invertidos</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Como funciona</a></li>
+									
+								</ul>
+							</li>
+                            {% if user.is_authenticated %}
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Vender</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{% url 'anunciar' %}">Leilão Clássico</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'criar' %}">Leilão Invertido</a></li>
+									<li class="nav-item"><a class="nav-link" href="#">Como funciona</a></li>
+								</ul>
+							</li>
+                            {% endif %}
+
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Categorias</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{% url 'computadores' %}">Computadores</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'smartphones' %}">Smartphones</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'drones' %}">Drones</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'consolas' %}">Consolas</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'televisores' %}">Televisores</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'outros' %}">Outros</a></li>
+								</ul>
+							</li>
+
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Área Pessoal</a>
+								<ul class="dropdown-menu">
+									
+                                    {% if user.is_authenticated %}
+                                    <!--<li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashoard</a></li>-->
+									<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Terminar Sessão</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                                    {% else %}
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar Sessão</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registar-se</a></li>
+									{% endif %}
+								</ul>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contacte-nos</a></li>
+
+							
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form class="d-flex justify-content-between" action="{% url 'aresultados' %}" method="GET">
+					<input type="text" name="q" placeholder="Procurar" value="{{request.GET.q}}" >
+					<button type="submit" class="btn"></button>
+					<span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
+				</form>
+			</div>
+		</div>
+	</header>
+	<!-- FIM DO MENÚ NAVEGAÇÃO -->
+
+    {% block content %}
+    {% endblock %}
+
+	
+
+	<!-- start footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Quem somos</h6>
+						<p>
+							A 2Mão é uma plataforma que procura promover a Economia Circular ao facilitar a Compra e Venda de dispositivos eletrónicos usados.
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Links Úteis</h6>
+						<a href="" style="text-decoration: none; color: white;">Política de Privacidade</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Termos & Condições</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Contactos</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Livro de Reclamações</a>
+					</div>
+				</div>
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget mail-chimp">
+						<h6 class="mb-20">Navegação Rápida </h6>
+						<a href="" style="text-decoration: none; color: white;">Política de Privacidade</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Termos & Condições</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Contactos</a> <br>
+						<a href="" style="text-decoration: none; color: white;">Livro de Reclamações</a>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Siga-nos</h6>
+						<p>Acompanhe-nos nas nossas redes sociais</p>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="lnr lnr-thumbs-up"></i></a>
+							<a href="#"><i class="lnr lnr-users"></i></a>
+							<a href="#"><i class="lnr lnr-apartment"></i></a>
+							<a href="#"><i class="lnr lnr-star"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="lnr lnr-heart"" aria-hidden="true"></i> by <a href="https://tejo7.pt/josecandido.html" target="_blank">José Cândido</a>
+</p>
+			</div>
+		</div>
+	</footer>
+	<!-- End footer Area -->
+
+	<!-- SCRIPTS -->
+
+	
+
+	<script type="text/javascript" src="https://2mao.pt/js/main.js"></script>
+	<script src="https://2mao.pt/assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	 crossorigin="anonymous"></script>
+	<script src="https://2mao.pt/assets/js/vendor/bootstrap.min.js"></script>
+	<script src="https://2mao.pt/assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="https://2mao.pt/assets/js/jquery.nice-select.min.js"></script>
+	<script src="https://2mao.pt/assets/js/jquery.sticky.js"></script>
+	<script src="https://2mao.pt/assets/js/nouislider.min.js"></script>
+	<script src="https://2mao.pt/assets/js/countdown.js"></script>
+	<script src="https://2mao.pt/assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="https://2mao.pt/assets/js/owl.carousel.min.js"></script>
+	<!--gmaps Js-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="https://2mao.pt/assets/js/gmaps.min.js"></script>
+	<script src="https://2mao.pt/assets/js/main.js"></script>
+</body>
+
+</html>

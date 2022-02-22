@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Criar um Leilão{% endblock %}</title>
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>CRIAR UM LEILÃO</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+
+
+ <!--================Tracking Box Area =================-->
+ <section class="tracking_box_area section_gap">
+    
+    <div class="container">
+        <div class="tracking_box_inner">
+            <p>Olá <b>{{user}}</b> </p>
+            <p>Nesta secção poderá anunciar um Leilão. Pode ver os nossos Termos & Condições neste <a href="">LINK</a> </p>
+            
+            <form class="row tracking_form" action="{% url 'anunciar' %}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                
+                <div class="col-md-12 form-group">
+                    <button type="submit" value="submit" class="primary-btn">PUBLICAR</button>
+                </div>
+            </form>
+            {% if message %}
+                <div class="alert alert-{{msg_type}}">{{ message }}</div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!--================End Tracking Box Area =================-->
+
+
+{% endblock %}
+

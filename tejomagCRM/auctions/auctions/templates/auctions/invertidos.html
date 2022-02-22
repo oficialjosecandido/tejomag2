@@ -1,0 +1,86 @@
+{% extends "auctions/layout.html" %}
+<title>{% block title %}2ª Mão | Leilões Invertidos{% endblock %}</title>
+{% block content %}
+    <br>
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Leilões Invertidos Activos</h1>
+                <p>Hoje temos {{ total }} leilões activos para si. Pode clicar <a style="text-decoration: none; color: white;" href="{% url 'criar' %}">AQUI</a> para criar o seu Leilão</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->    
+
+
+<!-- start product Area -->
+<section >
+    <!-- single product slide -->
+    <div class="single-product-slider">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 text-center">
+                    <div class="section-title">
+                        <br>                        
+                        <div id="searchWrapper">
+                            <p>Pode procurar aqui o seu leilão:</p>
+                            <form action="{% url 'dresultados' %}" method="GET">
+                                <input type="text" name="q" value="{{request.GET.q}}" placeholder="Procurar">
+                                <!--<button class="btn btn-success" type="submit">
+                                    Procurar
+                                </button>-->
+                            </form>                       
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap; align-content: flex-start; align-items: center; justify-content: center;">
+                    {% for product in products %}
+                    <div style="min-width: 300px; margin: 3px;">
+                        <a href="{% url 'artigo' product.id %}" style="text-decoration: none;">
+                        <div class="profile-card-4 text-center" style="height:500px;">
+                            <img src="{{ product.imagem1.url }}" style="max-height: 300px;" alt="{{ product.title }}" class="img img-responsive">
+                            <div class="profile-content">
+                                
+                                <div class="profile-description"> <h5>{{ product.title }}</h5><p> {{ product.excerpt }}</p></div> 
+                                <div class="row2" style="display: flex;">
+                                    <div class="col-xs-4" style="margin-left: 5px; justify-content: center; align-items: center;">
+                                        <div class="profile-overview">
+                                            <p>DEADLINE</p>
+                                            <h4>{{ product.deadline|timeuntil}}</h4></div>
+                                    </div>
+                                    <div class="col-xs-4" style="margin-left: 10px;"> 
+                                        <div class="profile-overview">
+                                            <p>OFERTA ACTUAL</p>
+                                            <h4>€{{ product.pbase}}</h4></div>
+                                    </div>
+                                    <<!--div class="col-xs-4" style="margin-left: 10px;">
+                                        <div class="profile-overview">
+                                            <p>VIEWS</p>
+                                            <h4>168</h4></div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    {% include 'auctions/paginator.html' with page=products %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- single product slide -->
+    
+</section>
+<!-- end product Area -->
+
+{% endblock %}
