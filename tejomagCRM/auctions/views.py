@@ -8,6 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+
+from auctions.serializers import *
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -21,6 +23,19 @@ from django.conf import settings
 import datetime
 import json
 
+
+""" @csrf_exempt
+def banners5Api(request, id=0):
+    banners = Banner.objects.order_by('-created_at')[:4]
+    banners_serializer = BannersSerializer(banners, many=True)
+    return JsonResponse(banners_serializer.data, safe=False) """
+
+
+def newsAPI(request, id=0):
+    news = News.objects.order_by('-date')[:4]
+    news_serializer = NewsSerializer(news, many=True)
+    return JsonResponse(news_serializer.data, safe=False) 
+
 # this is the default view
 def index(request):
 
@@ -32,8 +47,13 @@ def index(request):
     
     return render(request, "auctions/index.html", context)
 
+# this is the mocks view
+def mocks(request):    
+    return render(request, "auctions/mocks.html")
+
 # this is the view for login
 def login_view(request):
+    print('passei aqui.....')
     if request.method == "POST":
         # Attempt to sign user in
         username = request.POST["username"]
@@ -95,8 +115,8 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()        
-            send_mail('BemVindo ao 2Mão', 
-                    'Serve este email para confirmar o seu registo na nossa plataforma', 
+            send_mail('BemVindo à TEJOmag', 
+                    'Serve este email para confirmar o seu registo na nossa plataforma de backoffice', 
                     settings.EMAIL_HOST_USER, 
                     [email], 
                     fail_silently=False)
@@ -501,28 +521,37 @@ def anunciar(request):
         "form": form,
     })
 
-# @login_required(login_url='/llogin')
-def createNews(request):
-    
+# backoffice create News
+@login_required(login_url='/llogin')
+def createNews(request):    
     form = newsForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
-        """ send_mail('2Mão | Leilão Criado com Sucesso', 
-                    'Serve este email para confirmar que o seu leilão foi criado com sucesso', 
+        send_mail('TEJOmag | flashNews para aprovação', 
+                    'Serve este email para confirmar que ' + request.user.username + ' criou uma flashNews. Obrigado', 
                     settings.EMAIL_HOST_USER, 
-                    [request.user.email], 
-                    fail_silently=False) """
-        return render(request, 'auctions/index.html', {"message": "O seu post foi enviado para aprovação. Obrigado"})    
+                    [request.user.email, 'geral@tejomag.pt'], 
+                    fail_silently=False)
+        return render(request, 'auctions/index.html', {"message": "O seu post foi enviado para aprovação. Obrigado"})
+    
+    
     return render(request, 'auctions/createNews.html', {
-        "form": form
+        "form": form,
     })
 
-
-def newsDetails(request, id):
-    news = News.objects.filter(id=id)
+# frontEnd news details page
+def newsDetails(request, slug):
+    news = News.objects.filter(slug=slug)
     if news :
-        news.views += 1
+        news[0].views += 1
         print(news)
+        news_serializer = FlashNewsSerializer(news, many=True)
+        return JsonResponse(news_serializer.data, safe=False)
+    return render(request, 'auctions/newsDetails.html', {'news':news})
+
+# backup News Details Page
+def BOnewsDetails(request, slug):
+    news = News.objects.filter(slug=slug)[0]
     return render(request, 'auctions/newsDetails.html', {'news':news})
 
 def search(request): 

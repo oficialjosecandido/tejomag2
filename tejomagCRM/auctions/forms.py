@@ -22,13 +22,13 @@ class newsForm(forms.ModelForm):
     class Meta:  
         model = News
         template_name = 'createNews.html'
-        fields = ['author', 'title', 'p1', 'excerpt', 'category', 'tags', 'image1', 'image2', 'image3_link', 'image4_link', 'image5_link']
+        fields = ['author', 'title', 'p1', 'excerpt', 'category', 'tags', 'status', 'image1_link', 'image2_link', 'image3_link']
 
         widgets = {
             'author': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Autor'}),
             'title': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Título'}),
-            'p1': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Descrição'}),
             'excerpt': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Excerto (máximo 100 palavras)'}),
+            'p1': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Descrição'}),
             # 'starting_bid': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Valor Mínimo (€)'}),            
 
         }

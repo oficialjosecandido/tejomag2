@@ -25,8 +25,9 @@ SECRET_KEY = '6ps8j!crjgrxt34cqbqn7x&b3y%(fny8k8nh21+qa)%ws3fh!q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['2mao.pt', 'www.2mao.pt', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'taggit',
+    "corsheaders",
 
     
 ]
@@ -52,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'commerce.urls'
@@ -144,8 +148,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_HOST = 'smtp-pt.securemail.pro'
 EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'geral@2mao.pt'
-EMAIL_HOST_PASSWORD = 'portugal_12345'
+EMAIL_HOST_USER = 'geral@tejomag.pt'
+EMAIL_HOST_PASSWORD = 'dGxP7ytYD_$-ngR'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 

@@ -12,20 +12,27 @@ class User(AbstractUser):
 class News(models.Model):
     author = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
-    views = models.IntegerField(default=0, null=True, blank=True)
+    views = models.IntegerField(default=0)
     tags = TaggableManager() 
     slug = models.SlugField(unique=True, max_length=100)
     os_choice = (
-        ('Smartphones', 'Smartphones'), 
-        ('Computadores', 'Computadores'), 
-        ('Gadgets', 'Gadgets'), 
-        ('Consolas', 'Consolas'), 
-        ('Bicicletas Motorizadas', 'Bicicletas Motorizadas'),
-        ('Drones', 'Drones'),
-        ('Fotografia e Video', 'Fotografia e Video'),
-        ('Outros', 'Outros')
+        ('Economia', 'Economia'), 
+        ('Politica', 'Politica'), 
+        ('Mundo', 'Mundo'), 
+        ('Desporto', 'Desporto'), 
+        ('Justiça', 'Justiça'),
+        ('Lifestyle', 'Lifestyle'),
+        ('Tecnologia', 'Tecnologia'),
+        ('Ciência', 'Ciência')
     )
     category = models.CharField(max_length=64, choices=os_choice)
+    stata = (
+        ('Em atualização', 'Em atualização'),
+        ('Fontes não verificadas', 'Fontes não verificadas'),
+        ('Verificado', 'Verificado'),
+        ('Fake News', 'Fake News')
+    )
+    status = models.CharField(max_length=64, choices=stata)
 
     title = models.CharField(max_length=30)
     excerpt = models.CharField(max_length=100)
@@ -34,14 +41,15 @@ class News(models.Model):
     p3 = models.TextField(null=True, blank=True)
     p4 = models.TextField(null=True, blank=True)
     p5 = models.TextField(null=True, blank=True)
-    
-    image1 = models.ImageField(upload_to = 'ofertas/', blank=True, null=True)
-    image2 = models.ImageField(upload_to = 'ofertas/', blank=True, null=True)
+    image1_link = models.CharField(max_length=500, null=True, blank=True)
+    image2_link = models.CharField(max_length=500, null=True, blank=True)
     image3_link = models.CharField(max_length=500, null=True, blank=True)
     image4_link = models.CharField(max_length=500, null=True, blank=True)
     image5_link = models.CharField(max_length=500, null=True, blank=True)
     image6_link = models.CharField(max_length=500, null=True, blank=True)
     image7_link = models.CharField(max_length=500, null=True, blank=True)
+    image8_link = models.CharField(max_length=500, null=True, blank=True)
+    image9_link = models.CharField(max_length=500, null=True, blank=True)
 
     def save(self, *args, **kwargs): 
         self.slug=slugify(self.excerpt)
