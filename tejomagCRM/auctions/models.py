@@ -59,6 +59,61 @@ class News(models.Model):
     def __str__(self):
         return f"{self.title}: por {self.author} na data {self.date} e com {self.views} views"
 
+
+#model for Articles
+class Article(models.Model):
+    author = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now_add=True)
+    views = models.IntegerField(default=0)
+    slug = models.SlugField(unique=True, max_length=100)
+    os_choice = (
+        ('Economia', 'Economia'), 
+        ('Politica', 'Politica'), 
+        ('Mundo', 'Mundo'), 
+        ('Desporto', 'Desporto'), 
+        ('Justiça', 'Justiça'),
+        ('Lifestyle', 'Lifestyle'),
+        ('Tecnologia', 'Tecnologia'),
+        ('Ciência', 'Ciência')
+    )
+    category = models.CharField(max_length=64, choices=os_choice)
+    stata = (
+        ('Entrevista', 'Entrevista'),
+        ('Reportagem', 'Reportagem'),
+        ('Investigação', 'Investigação'),
+        ('Opinião', 'Opinião')
+    )
+    type = models.CharField(max_length=64, choices=stata)
+    featured = models.BooleanField(default=False, null=True, blank=True)
+    sprint = models.BooleanField(default=False, blank=True, null=True)
+
+    title = models.CharField(max_length=30)
+    excerpt = models.CharField(max_length=100)
+    p1 = models.TextField()
+    p2 = models.TextField(null=True, blank=True)
+    p3 = models.TextField(null=True, blank=True)
+    p4 = models.TextField(null=True, blank=True)
+    p5 = models.TextField(null=True, blank=True)
+    image1_link = models.CharField(max_length=500, null=True, blank=True)
+    image2_link = models.CharField(max_length=500, null=True, blank=True)
+    image3_link = models.CharField(max_length=500, null=True, blank=True)
+    image4_link = models.CharField(max_length=500, null=True, blank=True)
+    image5_link = models.CharField(max_length=500, null=True, blank=True)
+    image6_link = models.CharField(max_length=500, null=True, blank=True)
+    image7_link = models.CharField(max_length=500, null=True, blank=True)
+    image8_link = models.CharField(max_length=500, null=True, blank=True)
+    image9_link = models.CharField(max_length=500, null=True, blank=True)
+
+    def save(self, *args, **kwargs): 
+        self.slug=slugify(self.excerpt)
+        super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return f"{self.title}: por {self.author} na data {self.date} e com {self.views} views"
+
+
+
 # model for listings
 class Listing(models.Model):
     seller = models.CharField(max_length=30)
@@ -94,52 +149,3 @@ class Listing(models.Model):
     def __str__(self):
         return f"{self.title}: por {self.seller} com uma bid de €{self.starting_bid} na data {self.created_at}:"
 
-# model for bids
-class Bid(models.Model):
-    user = models.CharField(max_length=64)
-    title = models.CharField(max_length=64)
-    listingid = models.IntegerField()
-    bid = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-
-# model for comments
-class Comment(models.Model):
-    user = models.CharField(max_length=64)
-    comment = models.CharField(max_length=64)
-    listingid = models.IntegerField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-
-# model for watchlist
-class Watchlist(models.Model):
-    user = models.CharField(max_length=64)
-    listingid = models.IntegerField()
-
-# model to store the winners
-class Winner(models.Model):
-    owner = models.CharField(max_length=64)
-    owner.email = models.EmailField()
-    winner = models.CharField(max_length=64)
-    listingid = models.IntegerField()
-    image = models.ImageField()
-    winprice = models.IntegerField()
-    title = models.CharField(max_length=64, null=True)
-
-    def __str__(self):
-        return f"{self.title} por €{self.winprice} reclamado por {self.winner}."
-
-
-class Notification(models.Model):
-    receiver = models.CharField(max_length=64)
-    title = models.CharField(max_length=64, null=True)
-    text = models.TextField()
-    os_choice = (
-        ('Importante', 'Importante'), 
-        ('Não-Lida', 'Não-Lida'), 
-        ('Lida', 'Lida'),         
-    )
-    status = models.CharField(max_length=64, choices=os_choice)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Notificação para {self.receiver}: {self.title}"

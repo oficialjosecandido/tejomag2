@@ -3,7 +3,68 @@
 {% load static %}
 {% block content %}
 
-<p>teste</p>
+<div class="container-fluid contact_us_bg_img">
+    <div class="container">
+        <div class="row">
+            <a href="#" class="fh5co_con_123"><i class="fa fa-lock"></i></a>
+            <a href="#" class="fh5co_con pt-2"> BackOffice - Área Reservada </a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid  fh5co_fh5co_bg_contcat" style="background-color: transparent;">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-md-4 py-3">
+                <a href="{% url 'register' %}" style="text-decoration: none">
+                    <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                        <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                            <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-user"></i></span> </div>
+                        </div>
+                        <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                            <span class="c_g d-block">REGISTAR</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 py-3">
+                <a href="{% url 'llogin' %}" style="text-decoration: none">
+                    <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                        <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                            <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-map"></i></span> </div>
+                        </div>
+                        <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                            <span class="c_g d-block">ENTRAR</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 py-3">
+                <a href="{% url 'contact'%}" style="text-decoration: none">
+                    <div class="row fh5co_contact_us_no_icon_difh5co_hover">
+                        <div class="col-3 fh5co_contact_us_no_icon_difh5co_hover_1">
+                            <div class="fh5co_contact_us_no_icon_div"> <span><i class="fa fa-envelope"></i></span> </div>
+                        </div>
+                        <div class="col-9 align-self-center fh5co_contact_us_no_icon_difh5co_hover_2">
+                            <span class="c_g d-block">Contacte-nos</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<!-- <p>teste</p>
+<center>
+    <p>Bem vindo {% if user %} <span style="color:navy">{{user.username}}</span> {% endif %} </p> 
+</center> -->
+
+
 
 
 {% endblock %}

@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'frontend';
   readonly APIUrl =  'http://127.0.0.1:8000/';
+  news: any;
 
   constructor(private http:HttpClient) {}
 
@@ -26,7 +27,13 @@ export class AppComponent {
   getNews() {
     this.getBanners().subscribe(
       res =>
-      console.log('news', res)
+      // console.log('news', res)
+      this.news = res
     );
+  }
+
+  getDetails(value: any) {
+    console.log('slug....', this.APIUrl + `news/${value}`);
+    return this.http.get<any[]>(this.APIUrl + `news/${value}`);
   }
 }
