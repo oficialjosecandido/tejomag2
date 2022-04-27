@@ -16,13 +16,14 @@ urlpatterns = [
     #verificar se este URL está a funcionar
     path('news/<slug:slug>', views.newsDetails, name="newsDetails"),
     path('BO/news/<slug:slug>', views.BOnewsDetails, name="BOnewsDetails"),
-    path('articles/<slug:slug>', views.newsDetails, name="newsDetails"),
+    path('articles/<slug:slug>', views.articleDetails, name="newsDetails"),
     path('BO/articles/<slug:slug>', views.BOnewsDetails, name="BOnewsDetails"),
 
 
 
     #para servir o frontEnd
     re_path(r'^news/$', views.newsAPI),
+    re_path(r'^articles', views.articlesSprintAPI),
     # re_path(r'^banners/$', views.bannersApi),
     # re_path(r'^banners5/$', views.banners5Api),
     # re_path(r'^fnewsLatest/$', views.latestFlashNewsAPI),

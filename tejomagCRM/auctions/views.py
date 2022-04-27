@@ -36,6 +36,11 @@ def newsAPI(request, id=0):
     news_serializer = FlashNewsSerializer(news, many=True)
     return JsonResponse(news_serializer.data, safe=False) 
 
+def articlesSprintAPI(request, id=0):
+    articles = Article.objects.filter(sprint = True)
+    articles_serializer = ArticleSerializer(articles, many=True)
+    return JsonResponse(articles_serializer.data, safe=False) 
+
 def newsDetailsAPI(slug):
     news = News.objects.filter(slug=slug)
     news_serializer = FlashNewsSerializer(news, many=True)
@@ -58,7 +63,6 @@ def mocks(request):
 
 # this is the view for login
 def login_view(request):
-    print('passei aqui.....')
     if request.method == "POST":
         # Attempt to sign user in
         username = request.POST["username"]
@@ -190,18 +194,18 @@ def createNews(request):
 
 @login_required(login_url='/llogin')
 def createArticle(request):    
-    form = newsForm(request.POST, request.FILES)
+    form = articleForm(request.POST)
     if form.is_valid():
         form.save()
-        send_mail('TEJOmag | flashNews para aprovação', 
+        send_mail('TEJOmag | Novo Artigo para aprovação', 
                     'Serve este email para confirmar que ' + request.user.username + ' criou um novo Artigo. Obrigado', 
                     settings.EMAIL_HOST_USER, 
                     [request.user.email, 'geral@tejomag.pt'], 
                     fail_silently=False)
-        return render(request, 'auctions/index.html', {"message": "O seu post foi enviado para aprovação. Obrigado"})
+        return render(request, 'auctions/createArticle.html', {"message": "O seu artigo foi enviado para aprovação. Obrigado"})
     
     
-    return render(request, 'auctions/createNews.html', {
+    return render(request, 'auctions/createArticle.html', {
         "form": form,
     })
 
@@ -285,7 +289,7 @@ def contact(request):
             "Contacto de: " + name,
             email +" escreveu: " + messagem,
             email,
-            ['mh.josevicente@gmail.com', 'josevcandido@gmail.com'],
+            ['geral@tejomag.pt', 'josevcandido@gmail.com'],
             fail_silently=False
         )
         

@@ -22,4 +22,4 @@ class FlashNewsSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('author', 'title', 'date', 'views', 'excerpt') 
+        fields = ('author', 'title', 'slug', 'date', 'views', 'excerpt', 'p1', 'p2', 'p3', 'p4', 'category', 'author_username', 'image1_link') 

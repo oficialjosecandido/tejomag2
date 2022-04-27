@@ -1,0 +1,45 @@
+
+{% extends "auctions/layout.html" %}
+<title>{% block title %}TEJOmag | Criar um Artigo {% endblock %}</title>
+{% block content %}
+
+
+<div class="container-fluid contact_us_bg_img">
+    <div class="container">
+        <div class="row">
+            <a href="#" class="fh5co_con_123"><i class="fa fa-home"></i></a>
+            <a href="#" class="fh5co_con pt-2"> Criar um Artigo </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid mb-4">
+    <div class="container">
+        <!-- <div class="col-12 text-center contact_margin_svnit ">
+            <div class="text-center fh5co_heading py-2">Contact Us</div>
+        </div> -->
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form class="row" id="fh5co_contact_form" action="{% url 'createArticle' %}" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+                    {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">PUBLICAR</button>
+                        </div>
+                </form>
+            </div>
+            <div class="col-12 col-md-6 align-self-center">
+                <h3>Criar um artigo</h3>
+                <p>Ao criar um artigo está deve seguir os seguintes passos:</p>
+                <ol>
+                    <li><strong>Identificar o autor:</strong> o nome que usar será o nome que vai aparecer no artigo</li>
+                    <li><strong>Definir um titulo:</strong> o titulo que vai definir será o que aparece no artigo.</li>
+                    <li><strong>Definir um excerto:</strong> o excerto é obrigatório porque vai aparecer na listagem dos artigos e será a partir do excerto que vai ser construído o URL do artigo.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

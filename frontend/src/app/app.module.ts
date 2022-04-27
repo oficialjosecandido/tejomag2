@@ -6,14 +6,20 @@ import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
+import { ArticlesDetailsComponent } from './components/articles/articles-details/articles-details.component';
+import { DummyComponent } from './components/dummy/dummy.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    ArticlesDetailsComponent,
+    DummyComponent,
 
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     HttpClientModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
