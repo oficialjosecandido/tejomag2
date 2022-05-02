@@ -9,6 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { ArticlesDetailsComponent } from './components/articles/articles-details/articles-details.component';
 import { DummyComponent } from './components/dummy/dummy.component';
+import { TermsComponent } from './components/landings/terms/terms.component';
+import { EstatutoEditorialComponent } from './components/landings/estatuto-editorial/estatuto-editorial.component';
+import { FichaTecnicaComponent } from './components/landings/ficha-tecnica/ficha-tecnica.component';
+import { PrivacyComponent } from './components/landings/privacy/privacy.component';
+import { CookiesComponent } from './components/landings/cookies/cookies.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +21,11 @@ import { DummyComponent } from './components/dummy/dummy.component';
     HomeComponent,
     ArticlesDetailsComponent,
     DummyComponent,
+    TermsComponent,
+    EstatutoEditorialComponent,
+    FichaTecnicaComponent,
+    PrivacyComponent,
+    CookiesComponent,
 
   ],
   imports: [
