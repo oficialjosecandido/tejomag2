@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NewsService {
 
-  readonly APIUrl =  'http://backoffice-tejo.com/';
+  readonly APIUrl =  'https://backoffice-tejo.com/';
   // readonly APIUrl =  'http://127.0.0.1:8000/';
 
   constructor(private http:HttpClient) { }

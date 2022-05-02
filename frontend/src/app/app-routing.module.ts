@@ -7,14 +7,14 @@ import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
-  {path: '', component: DummyComponent},
+  {path: 'dummy', component: DummyComponent},
   { path: 'article/:slug', component:ArticlesDetailsComponent},
+  { path: '', redirectTo: '/dummy', pathMatch: 'full' },
+  { path: '**', component: AppComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking'
-})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
