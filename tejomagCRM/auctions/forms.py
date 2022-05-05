@@ -5,7 +5,7 @@ class newsForm(forms.ModelForm):
     class Meta:  
         model = News
         template_name = 'createNews.html'
-        fields = ['author', 'title', 'p1', 'excerpt', 'category', 'tags', 'status', 'image1_link', 'image2_link', 'image3_link']
+        fields = ('author', 'title', 'p1', 'excerpt', 'category', 'tags', 'status', 'image1_link', 'image2_link', 'image3_link')
 
         widgets = {
             'author': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Autor'}),
@@ -13,6 +13,13 @@ class newsForm(forms.ModelForm):
             'excerpt': forms.TextInput(attrs={'class':'form-control', 'placeholder': 'Excerto (máximo 100 palavras)'}),
             'p1': forms.Textarea(attrs={'class':'form-control', 'placeholder': 'Descrição'}),
         }
+
+
+class ContactForm(forms.Form):
+    author = forms.CharField(max_length=100)
+    title = forms.CharField(max_length=1000)
+    excerpt = forms.CharField(max_length=256)
+    p1 = forms.CharField(widget=forms.Textarea)
 
 class articleForm(forms.ModelForm):  
     class Meta:  

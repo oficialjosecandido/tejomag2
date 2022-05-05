@@ -14,6 +14,8 @@ import { EstatutoEditorialComponent } from './components/landings/estatuto-edito
 import { FichaTecnicaComponent } from './components/landings/ficha-tecnica/ficha-tecnica.component';
 import { PrivacyComponent } from './components/landings/privacy/privacy.component';
 import { CookiesComponent } from './components/landings/cookies/cookies.component';
+import { CatsComponent } from './components/articles/cats/cats.component';
+import { CatsListComponent } from './components/articles/cats/cats-list/cats-list.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { CookiesComponent } from './components/landings/cookies/cookies.componen
     FichaTecnicaComponent,
     PrivacyComponent,
     CookiesComponent,
+    CatsComponent,
+    CatsListComponent,
 
   ],
   imports: [

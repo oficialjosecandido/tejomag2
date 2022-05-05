@@ -8,7 +8,4 @@ admin.site.register(News)
 admin.site.register(Article)
 
 
-#admin.site.register(Listing)
-
-
 

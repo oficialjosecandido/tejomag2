@@ -23,7 +23,8 @@ class News(models.Model):
         ('Justiça', 'Justiça'),
         ('Lifestyle', 'Lifestyle'),
         ('Tecnologia', 'Tecnologia'),
-        ('Ciência', 'Ciência')
+        ('Ciência', 'Ciência'),
+        ('Sociedade', 'Sociedade'),
     )
     category = models.CharField(max_length=64, choices=os_choice)
     stata = (

@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
@@ -19,6 +19,8 @@ from . import forms
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
 from django.conf import settings
+from django.views.generic import View
+from auctions.forms import ContactForm
 
 import datetime
 import json
@@ -29,6 +31,18 @@ def banners5Api(request, id=0):
     banners = Banner.objects.order_by('-created_at')[:4]
     banners_serializer = BannersSerializer(banners, many=True)
     return JsonResponse(banners_serializer.data, safe=False) """
+
+
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        form = ContactForm()
+        return render(request, 'auctions/create2News.html')
+
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            return redirect('contact')
+        return render(request, 'auctions/create2News.html', {'form': form})
 
 
 def newsAPI(request, id=0):

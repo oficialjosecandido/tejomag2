@@ -13,6 +13,8 @@ urlpatterns = [
     path('createNews', views.createNews, name="createNews"),
     path('createArticle', views.createArticle, name="createArticle"),
 
+    path('contact', views.ContactView.as_view(), name='contact'),
+
     #verificar se este URL está a funcionar
     path('news/<slug:slug>', views.newsDetails, name="newsDetails"),
     path('BO/news/<slug:slug>', views.BOnewsDetails, name="BOnewsDetails"),
